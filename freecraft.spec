@@ -1,15 +1,18 @@
 #
 # TODO:
 # - build all svga/sdl/X versions instead of bconds
-# - does %{_datadir}/games contain any binaries??? if so, they must be moved!
 #
 # Conditional build:
-# _with_svga - SVGALIB Suppor
-# _with_sdl - SDL Support
-# _with_sdlsvga - SDL/SVGALIB Support
-# _with_cda_internal - internal CD Audio Support
-# _with_cda_sdl	- SDL CD Audio Support
-# _with_wc2 - WarCraft 2 Expansion CD
+# video (default: X11-only version):
+# _with_svga		- SVGALIB	version
+# _with_sdl		- SDL		version
+# _with_sdlsvga		- SDL/SVGALIB	version
+# CD-Audio support:
+# _with_cda_internal	- internal	CD Audio Support
+# _with_cda_sdl		- SDL		CD Audio Support
+# other:
+# _with_flac		- with FLAC audio codec support
+# _with_wc2		- WarCraft 2 Expansion CD
 #
 Summary:	Free cross-platform real-time strategy gaming engine
 Summary(pl):	Wolnodostêpny, miêdzyplatformowy silnik gier strategicznych czasu rzeczywistego
@@ -22,11 +25,12 @@ Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/freecraft/%{name}-%{version}.
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-nonint.patch
 Patch2:		%{name}-fix.patch
+Patch3:		%{name}-flac-update.patch
 URL:		http://freecraft.sourceforge.net/
 %{?_with_sdl:BuildRequires:	SDL-devel}
 %{?_with_sdlsvga:BuildRequires:     SDL-devel}
 BuildRequires:	bzip2-devel
-#BuildRequires:	flac-devel
+%{?_with_flac:BuildRequires:	flac-devel >= 1.0.3}
 BuildRequires:	libpng-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	mad-devel
@@ -89,8 +93,8 @@ WITH_SOUND="y"; export WITH_SOUND
 # threaded sound
 WITH_THREADEDSOUND="y"; export WITH_THREADEDSOUND
 
-# FLAC support (not working jet)
-WITH_FLAC="n"; export WITH_FLAC
+# FLAC support
+WITH_FLAC="%{?_with_flac:y}%{!?_with_flac:n}"; export WITH_FLAC
 
 # OGG support
 WITH_OGG="y"; export WITH_OGG
