@@ -1,6 +1,11 @@
 #
 # TODO:
 # - build all svga/sdl/X versions instead of bconds
+# - check if it builds, because I got an error with
+#   *.desktop at the end of building process, and 
+#   cannot build package without commenting out line with 
+#   *.desktop in %files, but it might be my fault 
+#   so i keep section %files unchanged for now
 #
 # Conditional build:
 # video (default: X11-only version):
@@ -25,14 +30,14 @@ Release:	2
 Epoch:		1
 License:	GPL
 Group:		Applications/Games
-Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{snap}-src.tar.gz
+Source0:	http://home.earthlink.net/~pappy86312/downloads/%{name}-%{snap}-src.tar.gz
 # Source0-md5:	e7926083835d9f913e4bfc7e1ab13cc1
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-nonint.patch
 Patch3:		%{name}-flac-update.patch
-URL:		http://freecraft.sourceforge.net/
+URL:		http://freecraft.org/
 %{?with_sdl:BuildRequires:	SDL-devel}
 %{?with_sdlsvga:BuildRequires:	SDL-devel}
 %{?with_arts:BuildRequires:	arts-devel}
