@@ -113,8 +113,7 @@ cp %{SOURCE1} ./
 bzip2 -d fcmp-%{fcmp_ver}.tar.bz2 
 tar xfC fcmp-%{fcmp_ver}.tar $RPM_BUILD_ROOT%{_datadir}/games/%{name}
 
-install -m 755 tools/wartool $RPM_BUILD_ROOT%{_datadir}/games/%{name}/tools
-install -m 755 tools/build.sh $RPM_BUILD_ROOT%{_datadir}/games/%{name}/tools
+install tools/{wartool,build.sh} $RPM_BUILD_ROOT%{_datadir}/games/%{name}/tools
 cat > $RPM_BUILD_ROOT%{_bindir}/freecraft << EOF
 #!/bin/sh
 cd /usr/share/games/freecraft
@@ -129,8 +128,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc doc/ contrib/
 %attr(755,root,root) %{_bindir}/*
+%dir %{_datadir}/games/%{name}
 %attr(755,root,root) %{_datadir}/games/%{name}/freecraft
-#%{_datadir}/games/%{name}/data
 %{_datadir}/games/%{name}/tools
 
 %files data
