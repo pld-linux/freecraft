@@ -18,7 +18,7 @@
 Summary:	Free cross-platform real-time strategy gaming engine
 Summary(pl):	Wolnodostêpny, miêdzyplatformowy silnik gier strategicznych czasu rzeczywistego
 Name:		freecraft
-#%define	snap	030226
+%define	snap	030311
 Version:	1.18
 Release:	1
 #Release:      0.pre1.%{snap}.1
