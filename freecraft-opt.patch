@@ -1,0 +1,23 @@
+--- freecraft-020630/setup.orig	Sun Jun 30 21:44:16 2002
++++ freecraft-020630/setup	Sat Dec 21 23:33:56 2002
+@@ -130,9 +130,9 @@
+ 
+ # Choose optimization level
+ #DEBUG_CFLAGS="-g -O0 -fsigned-char \$(PROFILE) -pipe -Wall -Werror \$(IFLAGS) \$(DFLAGS)"
+-DEBUG_CFLAGS="-g -O1 -fsigned-char -Wall -Werror \$(IFLAGS) \$(DFLAGS)"
++DEBUG_CFLAGS="$OPTFLAGS -fsigned-char -Wall -Werror \$(IFLAGS) \$(DFLAGS)"
+ #-- Production (default)
+-CFLAGS="-O2 -pipe -fsigned-char -fomit-frame-pointer -fconserve-space -fexpensive-optimizations -ffast-math  \$(IFLAGS) \$(DFLAGS)"
++CFLAGS="$OPTFLAGS -pipe -fsigned-char -fconserve-space -fexpensive-optimizations -ffast-math  \$(IFLAGS) \$(DFLAGS)"
+ 
+ #------------------------------------------------------------------------------
+ # Function declarations
+@@ -274,7 +274,7 @@
+     WIN32=0
+     CC=cc
+     CCLD=c++
+-   CFLAGS="-O2 -pipe -fomit-frame-pointer -fconserve-space -fexpensive-optimizations -ffast-math  \$(IFLAGS) \$(DFLAGS) -traditional-cpp"
++   CFLAGS="$OPTFLAGS -pipe -fconserve-space -fexpensive-optimizations -ffast-math  \$(IFLAGS) \$(DFLAGS) -traditional-cpp"
+     echo "It appears that you are in a Darwin environment..."
+     echo "Use --beos, --win32 or --unix to override"
+   fi

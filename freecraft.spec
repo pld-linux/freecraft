@@ -11,7 +11,6 @@
 # _with_cda_sdl	- SDL CD Audio Support
 # _with_wc2 - WarCraft 2 Expansion CD
 #
-%define		fcmp_ver	020712
 Summary:	Free cross-platform real-time strategy gaming engine
 Summary(pl):	Wolnodostêpny, miêdzyplatformowy silnik gier strategicznych czasu rzeczywistego
 Name:		freecraft
@@ -19,15 +18,20 @@ Version:	020630
 Release:	0.1
 License:	GPL
 Group:		Applications/Games
-Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-Source1:	http://prdownloads.sourceforge.net/%{name}/fcmp-%{fcmp_ver}.tar.bz2
+Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/freecraft/%{name}-%{version}.tar.bz2
+Patch0:		%{name}-opt.patch
+Patch1:		%{name}-nonint.patch
+Patch2:		%{name}-fix.patch
 URL:		http://freecraft.sourceforge.net/
 %{?_with_sdl:BuildRequires:	SDL-devel}
 %{?_with_sdlsvga:BuildRequires:     SDL-devel}
-%{?_with_svga:BuildRequires:	svgalib-devel}
+BuildRequires:	bzip2-devel
 #BuildRequires:	flac-devel
-BuildRequires:	libogg-devel
+BuildRequires:	libpng-devel
+BuildRequires:	libvorbis-devel
 BuildRequires:	mad-devel
+%{?_with_svga:BuildRequires:	svgalib-devel}
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,92 +50,105 @@ byæ u¿yty do zbudowania gier strategicznych czasu rzeczywistego (RTS)
 w stylu C&C, WC2, SC i AOE. Dzia³a pod systemami: Linux, BSD, BeOS,
 MacOS/X, MacOS/Darwin i MS Windows (XP jeszcze nie jest obs³ugiwane).
 
-%package data
-Summary:        FreeCraft data
-Summary(pl):    Dane do FreeCrafta
+%package data-wc2
+Summary:        Freecraft - files that allow using orignal game data
+Summary(pl):    Freecraft - pliki pozwalaj±ce u¿ywaæ danych z oryginalnej gry
 Group:          Applications/Games
 Requires:	%{name} = %{version}
+Provides:	%{name}-data
+Obsoletes:	%{name}-data-fcmp
 
-%description data
-FreeCraft data.
+%description data-wc2
+Freecraft - files that allow using orignal game data.
 
-%description data -l pl
-Dane do FreeCrafta.
+NOTE: it requires data from orignal WC2 CD or Expansion CD.
+
+%description data-wc2 -l pl
+Freecraft - pliki pozwalaj±ce u¿ywaæ danych z oryginalnej gry.
+
+UWAGA: wymaga do dzia³ania danych z oryginalnego CD lub Expansion CD
+WC2.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 # Version to compile
-%{?_with_svga:echo -n "V" > options}
-%{?_with_sdl:echo -n "S" > options}
-%{?_with_sdlsvga:echo -n "B" > options}
-%{!?_with_svga:%{!?_with_sdl:%{!?_with_sdlsvga:echo -n "X" > options}}}
+%{?_with_svga:WITH_VIDEO="V"}
+%{?_with_sdl:WITH_VIDEO="S"}
+%{?_with_sdlsvga:WITH_VIDEO="B"}
+%{!?_with_svga:%{!?_with_sdl:%{!?_with_sdlsvga:WITH_VIDEO="X"}}}
+export WITH_VIDEO
 
 # sound support
-echo -n "y" >> options
+WITH_SOUND="y"; export WITH_SOUND
 
 # threaded sound
-echo -n "n" >> options
+WITH_THREADEDSOUND="y"; export WITH_THREADEDSOUND
 
 # FLAC support (not working jet)
-echo -n "n" >> options
+WITH_FLAC="n"; export WITH_FLAC
 
 # OGG support
-echo -n "y" >> options
+WITH_OGG="y"; export WITH_OGG
 
 # MAD MP3 support
-echo -n "y" >> options
+WITH_MAD="y"; export WITH_MAD
 
 # CD audio
-%{?_with_cda_internal:echo -n "i" >> options}
-%{?_with_cda_sdl:echo -n "S" >> options}
-%{!?_with_cda_internal:%{!?_with_cda_sdl:echo -n "n" >> options}}
+%{?_with_cda_internal:WITH_CDA="i"}
+%{?_with_cda_sdl:WITH_CDA="S"}
+%{!?_with_cda_internal:%{!?_with_cda_sdl:WITH_CDA="n"}}
+export WITH_CDA
 
-# COMPRESSION OPTIONS (both)
-echo -n "O" >> options
+# COMPRESSION OPTIONS (both zlib and bzip2, no zziplib)
+WITH_COMP="O"; export WITH_COMP
 
 # WarCraft 2 Expansion CD
-%{?_with_wc2:echo -n "y" >> options}
-%{!?_with_wc2:echo -n "n" >> options}
+WITH_WC2EXPCD="%{?_with_wc2:y}%{!?_with_wc2:n}"; export WITH_WC2EXPCD
 
 # Compile (NO!)
-echo -n "n" >> options
+WITH_COMPILE="n"; export WITH_COMPILE
 
-cat options | ./setup
+OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer} -D__I_KNOW_THAT_GNUC_3_IS_UNSUPPORTED__"
+export OPTFLAGS
+./setup
+
 %{__make} depend
-
-%{__make} CC="%{__cc} %{rpmcflags} -Wall"
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/games/%{name}/{,tools}}
 
-install freecraft $RPM_BUILD_ROOT%{_datadir}/games/%{name}
+install freecraft $RPM_BUILD_ROOT%{_bindir}/freecraft-bin
 cp -r data $RPM_BUILD_ROOT%{_datadir}/games/%{name}
-cp %{SOURCE1} ./
-bzip2 -d fcmp-%{fcmp_ver}.tar.bz2 
-tar xfC fcmp-%{fcmp_ver}.tar $RPM_BUILD_ROOT%{_datadir}/games/%{name}
 
-install tools/{wartool,build.sh} $RPM_BUILD_ROOT%{_datadir}/games/%{name}/tools
+install tools/build.sh $RPM_BUILD_ROOT%{_datadir}/games/%{name}/tools
+install tools/wartool $RPM_BUILD_ROOT%{_bindir}
+ln -sf %{_bindir}/wartool $RPM_BUILD_ROOT%{_datadir}/games/%{name}/tools/wartool
+
 cat > $RPM_BUILD_ROOT%{_bindir}/freecraft << EOF
 #!/bin/sh
 cd /usr/share/games/freecraft
-./freecraft
+%{_bindir}/freecraft-bin
 EOF
-chmod 755 $RPM_BUILD_ROOT%{_bindir}/freecraft
+
+rm -f doc/{*.lsm,gpl*} contrib/{doxygen*,macosx.tgz,msvc.zip}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc/ contrib/
+%doc doc/* contrib
 %attr(755,root,root) %{_bindir}/*
 %dir %{_datadir}/games/%{name}
-%attr(755,root,root) %{_datadir}/games/%{name}/freecraft
-%{_datadir}/games/%{name}/tools
+%attr(755,root,root) %{_datadir}/games/%{name}/tools
 
-%files data
-%defattr(644,root,root,755
+%files data-wc2
+%defattr(644,root,root,755)
 %{_datadir}/games/%{name}/data
