@@ -21,7 +21,7 @@ Name:		freecraft
 %define	snap	030311
 Version:	1.18
 Release:	1
-#Release:      0.pre1.%{snap}.1
+#Release:	0.pre1.%{snap}.1
 Epoch:		1
 License:	GPL
 Group:		Applications/Games
@@ -32,8 +32,8 @@ Patch1:		%{name}-nonint.patch
 Patch3:		%{name}-flac-update.patch
 URL:		http://freecraft.sourceforge.net/
 %{?_with_sdl:BuildRequires:	SDL-devel}
-%{?_with_sdlsvga:BuildRequires:     SDL-devel}
-%{?_with_arts:BuildRequires:    arts-devel}
+%{?_with_sdlsvga:BuildRequires:	SDL-devel}
+%{?_with_arts:BuildRequires:	arts-devel}
 BuildRequires:	bzip2-devel
 %{?_with_flac:BuildRequires:	flac-devel >= 1.0.3}
 BuildRequires:	libpng-devel
@@ -61,9 +61,9 @@ w stylu C&C, WC2, SC i AOE. Dzia³a pod systemami: Linux, BSD, BeOS,
 MacOS/X, MacOS/Darwin i MS Windows (XP jeszcze nie jest obs³ugiwane).
 
 %package data-wc2
-Summary:        Freecraft - files that allow using orignal game data
-Summary(pl):    Freecraft - pliki pozwalaj±ce u¿ywaæ danych z oryginalnej gry
-Group:          Applications/Games
+Summary:	Freecraft - files that allow using orignal game data
+Summary(pl):	Freecraft - pliki pozwalaj±ce u¿ywaæ danych z oryginalnej gry
+Group:		Applications/Games
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Provides:	%{name}-data = %{epoch}:%{version}-%{release}
 Obsoletes:	%{name}-data-fcmp
