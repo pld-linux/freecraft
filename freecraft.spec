@@ -36,9 +36,9 @@ URL:		http://freecraft.sourceforge.net/
 %{?_with_arts:BuildRequires:	arts-devel}
 BuildRequires:	bzip2-devel
 %{?_with_flac:BuildRequires:	flac-devel >= 1.0.3}
+BuildRequires:	libmad-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libvorbis-devel
-BuildRequires:	mad-devel
 %{?_with_svga:BuildRequires:	svgalib-devel}
 BuildRequires:	zlib-devel
 Conflicts:	%{name}-data < 1:1.18-0.pre1
