@@ -20,13 +20,15 @@ Summary(pl):	Wolnodostêpny, miêdzyplatformowy silnik gier strategicznych czasu r
 Name:		freecraft
 %define	snap	030311
 Version:	1.18
-Release:	1
+Release:	2
 #Release:	0.pre1.%{snap}.1
 Epoch:		1
 License:	GPL
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{snap}-src.tar.gz
 # Source0-md5:	e7926083835d9f913e4bfc7e1ab13cc1
+Source1:	%{name}.desktop
+Source2:	%{name}.png
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-nonint.patch
 Patch3:		%{name}-flac-update.patch
@@ -139,7 +141,8 @@ export OPTFLAGS
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/games/%{name}/{,tools}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/games/%{name}/{,tools}} \
+	$RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 install freecraft $RPM_BUILD_ROOT%{_bindir}/freecraft-bin
 cp -r data $RPM_BUILD_ROOT%{_datadir}/games/%{name}
@@ -151,11 +154,14 @@ ln -sf %{_bindir}/wartool $RPM_BUILD_ROOT%{_datadir}/games/%{name}/tools/wartool
 cat > $RPM_BUILD_ROOT%{_bindir}/freecraft << EOF
 #!/bin/sh
 cd /usr/share/games/freecraft
-%{_bindir}/freecraft-bin
+%{_bindir}/freecraft-bin "\$@"
 EOF
 
 rm -f doc/{*.lsm,gpl*} contrib/{doxygen*,macosx.tgz,msvc.zip,stdint.h}
 cp -rf contrib $RPM_BUILD_ROOT%{_datadir}/games/%{name}
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -167,6 +173,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/games/%{name}
 %attr(755,root,root) %{_datadir}/games/%{name}/tools
 %{_datadir}/games/%{name}/contrib
+%{_desktopdir}/*.desktop
+%{_pixmapsdir}/*.png
 
 %files data-wc2
 %defattr(644,root,root,755)
