@@ -18,10 +18,10 @@ Summary:	Free cross-platform real-time strategy gaming engine
 Summary(pl):	Wolnodostêpny, miêdzyplatformowy silnik gier strategicznych czasu rzeczywistego
 Name:		freecraft
 Version:	030226
-Release:	0.2
+Release:	0.3
 License:	GPL
 Group:		Applications/Games
-Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/freecraft/%{name}-%{version}-src.tar.gz
+Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}-src.tar.gz
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-nonint.patch
 Patch3:		%{name}-flac-update.patch
