@@ -113,7 +113,7 @@ WITH_THREADEDSOUND="y"; export WITH_THREADEDSOUND
 # FLAC support
 WITH_FLAC="%{?with_flac:y}%{!?with_flac:n}"; export WITH_FLAC
 
-# OGG support
+# Ogg support
 WITH_OGG="y"; export WITH_OGG
 
 # MAD MP3 support
