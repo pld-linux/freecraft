@@ -20,7 +20,7 @@ Summary(pl):	Wolnodostêpny, miêdzyplatformowy silnik gier strategicznych czasu r
 Name:		freecraft
 %define	snap	030226
 Version:	1.18
-Release:	0.pre1.%{snap}.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Games
