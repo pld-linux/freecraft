@@ -26,6 +26,7 @@ Epoch:		1
 License:	GPL
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{snap}-src.tar.gz
+# Source0-md5:	e7926083835d9f913e4bfc7e1ab13cc1
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-nonint.patch
 Patch3:		%{name}-flac-update.patch
