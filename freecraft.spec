@@ -29,7 +29,7 @@ Release:	2
 #Release:	0.pre1.%{snap}.1
 Epoch:		1
 License:	GPL
-Group:		Applications/Games
+Group:		X11/Applications/Games
 Source0:	http://home.earthlink.net/~pappy86312/downloads/%{name}-%{snap}-src.tar.gz
 # Source0-md5:	e7926083835d9f913e4bfc7e1ab13cc1
 Source1:	%{name}.desktop
@@ -70,7 +70,7 @@ MacOS/X, MacOS/Darwin i MS Windows (XP jeszcze nie jest obs³ugiwane).
 %package data-wc2
 Summary:	Freecraft - files that allow using orignal game data
 Summary(pl):	Freecraft - pliki pozwalaj±ce u¿ywaæ danych z oryginalnej gry
-Group:		Applications/Games
+Group:		X11/Applications/Games
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Provides:	%{name}-data = %{epoch}:%{version}-%{release}
 Obsoletes:	%{name}-data-fcmp
