@@ -1,14 +1,15 @@
---- freecraft-020630/setup.orig	Sat Dec 21 23:40:21 2002
-+++ freecraft-020630/setup	Sun Dec 22 00:35:55 2002
-@@ -443,7 +443,12 @@
+--- freecraft-030226/setup.orig	Fri Feb 28 17:19:05 2003
++++ freecraft-030226/setup	Fri Feb 28 17:27:18 2003
+@@ -459,7 +459,12 @@
    fi
    echo
-   echo -n "Please enter selection: "
+   echo -n "Please enter selection: (s) "
+-  read $N VIDSEL
 +  if [ -n "$WITH_VIDEO" ]; then
 +	  VIDSEL="$WITH_VIDEO"
 +	  echo $VIDSEL
 +  else
-   read $N VIDSEL
++	  read $N VIDSEL
 +  fi
    echo
  fi
@@ -17,115 +18,138 @@
  
  echo
  echo -n "Do you want to compile with sound? (y) "
+-read $N ANSWER
 +if [ -n "$WITH_SOUND" ]; then
 +	ANSWER="$WITH_SOUND"
 +	echo $ANSWER
 +else
- read $N ANSWER
++	read $N ANSWER
 +fi
  echo
  case $ANSWER in
    [nN])
 @@ -572,7 +582,12 @@
+ 	else
+ 	  echo
+ 	  echo -n "Do you want use arts daemon sound output? (n) "
+-	  read $N ANSWERA
++	  if [ -n "$WITH_SOUND_ARTS" ]; then
++		  ANSWER="$WITH_SOUND_ARTS"
++		  echo $ANSWER
++	  else		  
++		  read $N ANSWERA
++	  fi
+ 	  echo
+ 	  case $ANSWERA in
+ 	    [yY])
+@@ -595,7 +610,12 @@
  	    echo
  	    echo "Assuming you have a thread-safe X11 (libc6 or glibc),"
  	    echo -n "do you want to compile with threaded sound? (n) "
+-	    read $N ANSWER2
 +	    if [ -n "$WITH_THREADEDSOUND" ]; then
 +		    ANSWER2="$WITH_THREADEDSOUND"
 +		    echo $ANSWER2
 +	    else
- 	    read $N ANSWER2
++		    read $N ANSWER2
 +	    fi
  	    echo
- 	    case $ANSWER2 in [yY])
- 	      echo "THREAD		= -D_REENTRANT -DUSE_THREAD" >> $RULESFILE
-@@ -589,7 +604,12 @@
+ 	    case $ANSWER2 in 
+ 	      [yY])
+@@ -618,7 +638,12 @@
  	LIBCHECK="-lFLAC -lm"; check_for_libs
  	if test "$?" = 0 ; then 
  	echo -n "Would you like FLAC support? (n) "
+-	read $N ANSWER
 +	if [ -n "$WITH_FLAC" ]; then
-+		ANSWER="$WITH_FLAC"
-+		echo $ANSWER
++		 ANSWER="$WITH_FLAC"
++		 echo $ANSWER
 +	else
- 	read $N ANSWER
++		read $N ANSWER
 +	fi
  	echo
  	case $ANSWER in 
  	    [yY])
-@@ -607,7 +627,12 @@
+@@ -638,7 +663,12 @@
  	LIBCHECK="-lvorbisfile -lvorbis -logg"; check_for_libs
  	if test "$?" = 0 ; then 
  	echo -n "Would you like OGG support? (n) "
+-	read $N ANSWER
 +	if [ -n "$WITH_OGG" ]; then
 +		ANSWER="$WITH_OGG"
 +		echo $ANSWER
 +	else
- 	read $N ANSWER
++		read $N ANSWER
 +	fi
  	echo
  	case $ANSWER in 
  	    [yY])
-@@ -637,7 +662,12 @@
+@@ -671,7 +701,12 @@
  	LIBCHECK="-lmad"; check_for_libs
  	if test "$?" = 0 ; then 
  	echo -n "Would you like MAD MP3 support? (n) "
+-	read $N ANSWER
 +	if [ -n "$WITH_MAD" ]; then
 +		ANSWER="$WITH_MAD"
 +		echo $ANSWER
 +	else
- 	read $N ANSWER
++		read $N ANSWER
 +	fi
  	echo
  	case $ANSWER in 
  	    [yY])
-@@ -657,7 +687,12 @@
+@@ -693,7 +728,12 @@
  	echo -n "or [S]DL "
  	fi
  	echo -n "CD Audio support? (n) "
+-	read $N CDMode
 +	if [ -n "$WITH_CDA" ]; then
 +		CDMode="$WITH_CDA"
 +		echo $CDMode
 +	else
- 	read $N CDMode
++		read $N CDMode
 +	fi
  	echo
  	case $CDMode in
  	    [sS])
-@@ -741,7 +776,12 @@
+@@ -777,7 +817,12 @@
  fi
  echo
  echo -n "Please enter selection ($COMPDEF): "
+-read $N COMPOPT
 +if [ -n "$WITH_COMP" ]; then
 +	COMPOPT="$WITH_COMP"
 +	echo $COMPOPT
 +else
- read $N COMPOPT
++	read $N COMPOPT
 +fi
  echo
  
  if test "$COMPOPT x" = " x" ; then COMPOPT=$COMPDEF; fi
-@@ -897,7 +937,12 @@
- 
- echo
- echo -n "Are you using the WarCraft 2 Expansion CD? (n): "
-+if [ -n "$WITH_WC2EXPCD" ]; then
-+	YESORNO="$WITH_WC2EXPCD"
-+	echo $YESORNO
-+else
- read $N YESORNO
-+fi
- echo
- if [ "$YESORNO" = "Y" -o "$YESORNO" = "y" ] ; then
- echo -n " -DHAVE_EXPANSION" >> $RULESFILE
-@@ -965,7 +1010,12 @@
+@@ -827,7 +872,12 @@
+     echo "optimization support, which may cause Freecraft to run much slower."
+     echo
+     echo -n "Would you like debug support? (n): "
+-    read $N DEBUGASK
++    if [ -n $WITH_DEBUG ]; then
++	    DEBUGASK=$WITH_DEBUG
++	    echo $WITH_DEBUG
++    else
++    	read $N DEBUGASK
++    fi
+     case $DEBUGASK in
+ 	[yY])
+ 	    echo
+@@ -1156,7 +1206,12 @@
  echo "Done generating $RULESFILE."
  echo
  echo -n "Would you like to compile it now? (y) "
+-read $N ANSWER
 +if [ -n "$WITH_COMPILE" ]; then
 +	ANSWER="$WITH_COMPILE"
 +	echo $ANSWER
 +else
- read $N ANSWER
++	read $N ANSWER
 +fi
  echo
  
