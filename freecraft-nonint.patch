@@ -1,5 +1,5 @@
---- freecraft-030226/setup.orig	Fri Feb 28 17:19:05 2003
-+++ freecraft-030226/setup	Fri Feb 28 17:27:18 2003
+--- freecraft-030226/setup.orig	Fri Feb 28 23:46:25 2003
++++ freecraft-030226/setup	Fri Feb 28 23:53:31 2003
 @@ -459,7 +459,12 @@
    fi
    echo
@@ -140,6 +140,15 @@
      case $DEBUGASK in
  	[yY])
  	    echo
+@@ -848,7 +898,7 @@
+ CCMINOR=`echo $CCVERS | cut -d. -f 2`
+ CCREALLYMINOR=`echo $CCVERS | cut -d. -f 3`
+ 
+-if [ $CCMAJOR -gt 3 -o $CCMAJOR -eq 3 -a $CCMINOR -ge 2 ] ; then
++if false; then
+ if [ "$DEBUG" != 1 ] ; then
+     echo
+     echo "OPTIMIZATION OPTIONS"
 @@ -1156,7 +1206,12 @@
  echo "Done generating $RULESFILE."
  echo

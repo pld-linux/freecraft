@@ -11,23 +11,27 @@
 # _with_cda_internal	- internal	CD Audio Support
 # _with_cda_sdl		- SDL		CD Audio Support
 # other:
+# _with_arts		- arts audio output support
 # _with_flac		- with FLAC audio codec support
 # _with_wc2		- WarCraft 2 Expansion CD
 #
 Summary:	Free cross-platform real-time strategy gaming engine
 Summary(pl):	Wolnodostêpny, miêdzyplatformowy silnik gier strategicznych czasu rzeczywistego
 Name:		freecraft
-Version:	030226
-Release:	0.3
+%define	snap	030226
+Version:	1.18
+Release:	0.pre1.%{snap}.1
+Epoch:		1
 License:	GPL
 Group:		Applications/Games
-Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}-src.tar.gz
+Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{snap}-src.tar.gz
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-nonint.patch
 Patch3:		%{name}-flac-update.patch
 URL:		http://freecraft.sourceforge.net/
 %{?_with_sdl:BuildRequires:	SDL-devel}
 %{?_with_sdlsvga:BuildRequires:     SDL-devel}
+%{?_with_arts:BuildRequires:    arts-devel}
 BuildRequires:	bzip2-devel
 %{?_with_flac:BuildRequires:	flac-devel >= 1.0.3}
 BuildRequires:	libpng-devel
@@ -35,7 +39,7 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	mad-devel
 %{?_with_svga:BuildRequires:	svgalib-devel}
 BuildRequires:	zlib-devel
-%{?_with_arts:BuildRequires:    arts-devel}
+Conflicts:	%{name}-data < 1:1.18-0.pre1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -58,8 +62,8 @@ MacOS/X, MacOS/Darwin i MS Windows (XP jeszcze nie jest obs³ugiwane).
 Summary:        Freecraft - files that allow using orignal game data
 Summary(pl):    Freecraft - pliki pozwalaj±ce u¿ywaæ danych z oryginalnej gry
 Group:          Applications/Games
-Requires:	%{name} = %{version}
-Provides:	%{name}-data
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Provides:	%{name}-data = %{epoch}:%{version}-%{release}
 Obsoletes:	%{name}-data-fcmp
 
 %description data-wc2
@@ -74,7 +78,7 @@ UWAGA: wymaga do dzia³ania danych z oryginalnego CD lub Expansion CD
 WC2.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}-%{snap}
 %patch0 -p1
 %patch1 -p1
 
@@ -124,7 +128,7 @@ WITH_COMPILE="n"; export WITH_COMPILE
 # Debug
 WITH_DEBUG="n"; export WITH_DEBUG
 
-OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer} -D__I_KNOW_THAT_GNUC_3_IS_UNSUPPORTED__"
+OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer}"
 export OPTFLAGS
 ./setup
 
