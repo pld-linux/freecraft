@@ -1,6 +1,6 @@
---- freecraft-020630/setup.orig	Sun Jun 30 21:44:16 2002
-+++ freecraft-020630/setup	Sat Dec 21 23:33:56 2002
-@@ -130,9 +130,9 @@
+--- freecraft-030226/setup.orig	Thu Feb 27 06:58:07 2003
++++ freecraft-030226/setup	Fri Feb 28 17:35:43 2003
+@@ -131,9 +131,9 @@
  
  # Choose optimization level
  #DEBUG_CFLAGS="-g -O0 -fsigned-char \$(PROFILE) -pipe -Wall -Werror \$(IFLAGS) \$(DFLAGS)"
@@ -9,15 +9,6 @@
  #-- Production (default)
 -CFLAGS="-O2 -pipe -fsigned-char -fomit-frame-pointer -fconserve-space -fexpensive-optimizations -ffast-math  \$(IFLAGS) \$(DFLAGS)"
 +CFLAGS="$OPTFLAGS -pipe -fsigned-char -fconserve-space -fexpensive-optimizations -ffast-math  \$(IFLAGS) \$(DFLAGS)"
+ #-- High Optimization
+ HIGHOPT="-O3 -pipe -fsigned-char -fomit-frame-pointer -foptimize-sibling-calls -ffast-math -fstrength-reduce -fthread-jumps -fcse-follow-jumps -fcse-skip-blocks -frerun-cse-after-loop -frerun-loop-opt -fgcse -fgcse-lm -fgcse-sm -fdelete-null-pointer-checks -fexpensive-optimizations -fschedule-insns2 -funroll-loops -frename-registers -fno-cprop-registers \$(IFLAGS) \$(DFLAGS)"
  
- #------------------------------------------------------------------------------
- # Function declarations
-@@ -274,7 +274,7 @@
-     WIN32=0
-     CC=cc
-     CCLD=c++
--   CFLAGS="-O2 -pipe -fomit-frame-pointer -fconserve-space -fexpensive-optimizations -ffast-math  \$(IFLAGS) \$(DFLAGS) -traditional-cpp"
-+   CFLAGS="$OPTFLAGS -pipe -fconserve-space -fexpensive-optimizations -ffast-math  \$(IFLAGS) \$(DFLAGS) -traditional-cpp"
-     echo "It appears that you are in a Darwin environment..."
-     echo "Use --beos, --win32 or --unix to override"
-   fi
