@@ -21,7 +21,7 @@ Version:	030226
 Release:	0.3
 License:	GPL
 Group:		Applications/Games
-Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}-src.tar.gz
+Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}-src.tar.gz
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-nonint.patch
 Patch3:		%{name}-flac-update.patch
