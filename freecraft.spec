@@ -17,14 +17,13 @@
 Summary:	Free cross-platform real-time strategy gaming engine
 Summary(pl):	Wolnodostêpny, miêdzyplatformowy silnik gier strategicznych czasu rzeczywistego
 Name:		freecraft
-Version:	020630
+Version:	030226
 Release:	0.2
 License:	GPL
 Group:		Applications/Games
-Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/freecraft/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/freecraft/%{name}-%{version}-src.tar.gz
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-nonint.patch
-Patch2:		%{name}-fix.patch
 Patch3:		%{name}-flac-update.patch
 URL:		http://freecraft.sourceforge.net/
 %{?_with_sdl:BuildRequires:	SDL-devel}
@@ -36,6 +35,7 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	mad-devel
 %{?_with_svga:BuildRequires:	svgalib-devel}
 BuildRequires:	zlib-devel
+%{?_with_arts:BuildRequires:    arts-devel}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -77,7 +77,6 @@ WC2.
 %setup -q -n %{name}-%{version}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 # Version to compile
@@ -89,6 +88,11 @@ export WITH_VIDEO
 
 # sound support
 WITH_SOUND="y"; export WITH_SOUND
+
+# sound support arts
+%{!?_with_arts:WITH_SOUND_ARTS="y"}
+%{?_with_arts:WITH_SOUND_ARTS="n"}
+export WITH_SOUND_ARTS
 
 # threaded sound
 WITH_THREADEDSOUND="y"; export WITH_THREADEDSOUND
@@ -116,6 +120,9 @@ WITH_WC2EXPCD="%{?_with_wc2:y}%{!?_with_wc2:n}"; export WITH_WC2EXPCD
 
 # Compile (NO!)
 WITH_COMPILE="n"; export WITH_COMPILE
+
+# Debug
+WITH_DEBUG="n"; export WITH_DEBUG
 
 OPTFLAGS="%{rpmcflags} %{!?debug:-fomit-frame-pointer} -D__I_KNOW_THAT_GNUC_3_IS_UNSUPPORTED__"
 export OPTFLAGS
