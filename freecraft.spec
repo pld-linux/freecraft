@@ -18,7 +18,7 @@ Summary:	Free cross-platform real-time strategy gaming engine
 Summary(pl):	Wolnodostêpny, miêdzyplatformowy silnik gier strategicznych czasu rzeczywistego
 Name:		freecraft
 Version:	020630
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		Applications/Games
 Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/freecraft/%{name}-%{version}.tar.bz2
@@ -141,17 +141,19 @@ cd /usr/share/games/freecraft
 %{_bindir}/freecraft-bin
 EOF
 
-rm -f doc/{*.lsm,gpl*} contrib/{doxygen*,macosx.tgz,msvc.zip}
+rm -f doc/{*.lsm,gpl*} contrib/{doxygen*,macosx.tgz,msvc.zip,stdint.h}
+cp -rf contrib $RPM_BUILD_ROOT%{_datadir}/games/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc/* contrib
+%doc doc/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_datadir}/games/%{name}
 %attr(755,root,root) %{_datadir}/games/%{name}/tools
+%{_datadir}/games/%{name}/contrib
 
 %files data-wc2
 %defattr(644,root,root,755)
