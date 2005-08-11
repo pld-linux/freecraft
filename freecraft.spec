@@ -9,16 +9,16 @@
 #
 # Conditional build:
 # video (default: X11-only version):
-%bcond_with svga		# SVGALIB	version
-%bcond_with sdl			# SDL		version
-%bcond_with sdlsvga		# SDL/SVGALIB	version
+%bcond_with	svga		# SVGALIB	version
+%bcond_with	sdl			# SDL		version
+%bcond_with	sdlsvga		# SDL/SVGALIB	version
 # CD-Audio support:
-%bcond_with cda_internal	# internal	CD Audio Support
-%bcond_with cda_sdl		# SDL		CD Audio Support
+%bcond_with	cda_internal	# internal	CD Audio Support
+%bcond_with	cda_sdl		# SDL		CD Audio Support
 # other:
-%bcond_with arts		# arts audio output support
-%bcond_with flac		# with FLAC audio codec support
-%bcond_with wc2			# WarCraft 2 Expansion CD
+%bcond_with	arts		# arts audio output support
+%bcond_with	flac		# with FLAC audio codec support
+%bcond_with	wc2			# WarCraft 2 Expansion CD
 #
 Summary:	Free cross-platform real-time strategy gaming engine
 Summary(pl):	Wolnodostêpny, miêdzyplatformowy silnik gier strategicznych czasu rzeczywistego
