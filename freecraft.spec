@@ -21,7 +21,7 @@
 %bcond_with	wc2			# WarCraft 2 Expansion CD
 #
 Summary:	Free cross-platform real-time strategy gaming engine
-Summary(pl):	Wolnodostêpny, miêdzyplatformowy silnik gier strategicznych czasu rzeczywistego
+Summary(pl.UTF-8):   WolnodostÄ™pny, miÄ™dzyplatformowy silnik gier strategicznych czasu rzeczywistego
 Name:		freecraft
 %define	snap	030311
 Version:	1.18
@@ -59,17 +59,17 @@ AOE-like real-time strategy (RTS) games. It successfully runs under
 Linux, BSD, BeOS, MacOS/X, MacOS/Darwin and MS Windows (Windows XP is
 not supported).
 
-%description -l pl
-FreeCraft to wolnodostêpny, miêdzyplatformowy silnik gier
-strategicznych czasu rzeczywistego. Mo¿na graæ przeciwko ludziom przez
-sieæ lokaln± lub Internet, a tak¿e przeciwko komputerowi. Silnik mo¿e
-byæ u¿yty do zbudowania gier strategicznych czasu rzeczywistego (RTS)
-w stylu C&C, WC2, SC i AOE. Dzia³a pod systemami: Linux, BSD, BeOS,
-MacOS/X, MacOS/Darwin i MS Windows (XP jeszcze nie jest obs³ugiwane).
+%description -l pl.UTF-8
+FreeCraft to wolnodostÄ™pny, miÄ™dzyplatformowy silnik gier
+strategicznych czasu rzeczywistego. MoÅ¼na graÄ‡ przeciwko ludziom przez
+sieÄ‡ lokalnÄ… lub Internet, a takÅ¼e przeciwko komputerowi. Silnik moÅ¼e
+byÄ‡ uÅ¼yty do zbudowania gier strategicznych czasu rzeczywistego (RTS)
+w stylu C&C, WC2, SC i AOE. DziaÅ‚a pod systemami: Linux, BSD, BeOS,
+MacOS/X, MacOS/Darwin i MS Windows (XP jeszcze nie jest obsÅ‚ugiwane).
 
 %package data-wc2
 Summary:	Freecraft - files that allow using orignal game data
-Summary(pl):	Freecraft - pliki pozwalaj±ce u¿ywaæ danych z oryginalnej gry
+Summary(pl.UTF-8):   Freecraft - pliki pozwalajÄ…ce uÅ¼ywaÄ‡ danych z oryginalnej gry
 Group:		X11/Applications/Games
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Provides:	%{name}-data = %{epoch}:%{version}-%{release}
@@ -80,10 +80,10 @@ Freecraft - files that allow using orignal game data.
 
 NOTE: it requires data from orignal WC2 CD or Expansion CD.
 
-%description data-wc2 -l pl
-Freecraft - pliki pozwalaj±ce u¿ywaæ danych z oryginalnej gry.
+%description data-wc2 -l pl.UTF-8
+Freecraft - pliki pozwalajÄ…ce uÅ¼ywaÄ‡ danych z oryginalnej gry.
 
-UWAGA: wymaga do dzia³ania danych z oryginalnego CD lub Expansion CD
+UWAGA: wymaga do dziaÅ‚ania danych z oryginalnego CD lub Expansion CD
 WC2.
 
 %prep
