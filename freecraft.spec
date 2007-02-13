@@ -21,7 +21,7 @@
 %bcond_with	wc2			# WarCraft 2 Expansion CD
 #
 Summary:	Free cross-platform real-time strategy gaming engine
-Summary(pl.UTF-8):   Wolnodostępny, międzyplatformowy silnik gier strategicznych czasu rzeczywistego
+Summary(pl.UTF-8):	Wolnodostępny, międzyplatformowy silnik gier strategicznych czasu rzeczywistego
 Name:		freecraft
 %define	snap	030311
 Version:	1.18
@@ -69,7 +69,7 @@ MacOS/X, MacOS/Darwin i MS Windows (XP jeszcze nie jest obsługiwane).
 
 %package data-wc2
 Summary:	Freecraft - files that allow using orignal game data
-Summary(pl.UTF-8):   Freecraft - pliki pozwalające używać danych z oryginalnej gry
+Summary(pl.UTF-8):	Freecraft - pliki pozwalające używać danych z oryginalnej gry
 Group:		X11/Applications/Games
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Provides:	%{name}-data = %{epoch}:%{version}-%{release}
