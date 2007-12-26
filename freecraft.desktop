@@ -6,5 +6,5 @@ Exec=freecraft
 Icon=freecraft
 Terminal=false
 Type=Application
-Categories=Application;Game;StrategyGame;
+Categories=Game;StrategyGame;
 # vi: encoding=utf-8
