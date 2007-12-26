@@ -1,10 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Freecraft
 Comment=Real-time strategy gaming engine
 Comment[pl]=Silnik gier strategicznych czasu rzeczywistego
 Exec=freecraft
-Icon=freecraft.png
+Icon=freecraft
 Terminal=false
 Type=Application
 Categories=Application;Game;StrategyGame;
