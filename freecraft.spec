@@ -88,8 +88,8 @@ WC2.
 
 %prep
 %setup -q -n %{name}-%{snap}
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 %build
 # Version to compile
